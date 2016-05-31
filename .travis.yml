@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+- node
+- '4.3'
+- iojs
+- '0.12'
+matrix:
+  fast_finish: true
+sudo: false
+before_script:
+- npm run typings
+script:
+- npm run ci
+before_deploy:
+- npm run build
+deploy:
+  provider: npm
+  email: simon@simonemms.com
+  on:
+    all_branches: true
+    tags: true
+    repo: riggerthegeek/steeplejack-mysql
