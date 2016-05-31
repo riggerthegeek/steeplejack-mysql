@@ -2,7 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "module": "commonjs",
-    "moduleResolution": "classic",
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "removeComments": true,
