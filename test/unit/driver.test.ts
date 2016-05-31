@@ -92,25 +92,19 @@ describe("MySQL driver test", function () {
                 expect((<any> this.pool).release).to.be.a("function");
 
                 expect(this.mysql.createPool).to.be.calledOnce
-                    .calledWithExactly({
-                        connectionLimit: void 0
-                    });
+                    .calledWithExactly({});
 
             });
 
             it("should configure with set options", function () {
 
                 expect(this.driver({
-                    mysql: {
-                        host: "dbhost",
-                        user: "username",
-                        password: "password",
-                        database: "dbName",
-                        port: 1234
-                    },
-                    poolOptions: {
-                        max: 23
-                    }
+                    host: "dbhost",
+                    user: "username",
+                    password: "password",
+                    database: "dbName",
+                    port: 1234,
+                    connectionLimit: 23
                 })).to.be.equal(this.pool);
 
                 expect((<any> this.pool).acquire).to.be.a("function");

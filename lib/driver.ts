@@ -14,11 +14,11 @@
 import {Base} from "steeplejack/lib/base";
 const Bluebird = require("bluebird");
 import * as mysql from "mysql";
+import {IPoolConfig} from "mysql";
 const Connection = require("mysql/lib/Connection");
 
 
 /* Files */
-import {IMysqlConfig} from "./mysqlConfig";
 import {ICallback} from "./callback";
 
 
@@ -48,15 +48,12 @@ const factory = (StoreError: any) => {
     });
 
 
-    return (config: IMysqlConfig = {}) => {
+    return (config: IPoolConfig = {}) => {
 
-        /* Ensure we always receive an object for the options */
-        let mysqlOptions = Base.datatypes.setObject(config.mysql, {});
-        let poolOptions = Base.datatypes.setObject(config.poolOptions, {});
+        /* Default config to an empty object */
+        config = Base.datatypes.setObject(config, {});
 
-        mysqlOptions.connectionLimit = poolOptions.max;
-
-        let pool = mysql.createPool(mysqlOptions);
+        let pool = mysql.createPool(config);
 
         /**
          * Acquire
