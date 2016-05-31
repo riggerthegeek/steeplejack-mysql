@@ -18,29 +18,19 @@ This configures a Steeplejack injectable module called `$mysqlDriver`.
 
 ```javascript
 // Configure a factory dependency
-export let __factory = {
-    name: "$mongodbResource",
-    factory: ($mongodbDriver) => {
+export const __factory = {
+    name: "$mysqlResource",
+    factory: ($mysqlDriver) => {
 
-        let poolOptions = {};
-        let mongoOptions = {};
-        let mongoUrl = "mongodb://localhost/db";
+        const config = {}
 
-        return $mongodbDriver({
-            url: mongoUrl,
-            poolOptions,
-            mongoOptions
-        });
+        return $mongodbDriver(config);
 
     }
 };
 ```
 
-The `poolOptions` accepts anything that the [generic-pool](https://github.com/coopernurse/node-pool#documentation)
-takes.
-
-The `mongoOptions` accepts anything that the
-[MongoClient.connect options](http://mongodb.github.io/node-mongodb-native/2.1/api/MongoClient.html#.connect) take.
+The `config` accepts any of the [Pool Options](https://github.com/felixge/node-mysql#pool-options)
 
 ## Dependencies
 
